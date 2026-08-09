@@ -118,7 +118,7 @@ function hub(){var ns=nextSlot();
    +'<a class="tile" href="drinks-menu.pdf" target="_blank"><div class="ic">\u25cd</div><div><div class="t">Drinks & Cocktails</div><div class="d">Originals & A Cappella</div></div></a>'
    +(CUR?'<div class="tile" onclick="go(\''+'request\')"><div class="ic">\u266a</div><div><div class="t">Request a Song</div><div class="d">Pick from tonight\u2019s set or suggest one</div></div></div>':'')
    +'<div class="tile" onclick="openGame()"><div class="ic">\u25c9</div><div><div class="t">Play \u00b7 The Le Noir Deck</div><div class="d">Music questions, trivia & dares</div></div></div>'
-   +'<a class="tile" href="https://lenoir.com.sg/wp-content/uploads/2026/08/weeklypromo.jpeg" target="_blank"><div class="ic">⭐</div><div><div class="t">Promos</div><div class="d">Tonight\'s offers & loyalty</div></div></a></div>';}
+   +'<a class="tile" href="promos.html" target="_blank"><div class="ic">⭐</div><div><div class="t">Promos</div><div class="d">Tonight\'s offers & loyalty</div></div></a></div>';}
 function info(){var a=CUR;if(!a)return hub();var pl=playlistOf(a);
   var songs=pl.slice(0,8).map(s=>{var p=s.split(' \u2014 ');return '<div class="song"><div><div class="n">'+esc(p[0])+'</div><div class="a">'+esc(p[1]||'')+'</div></div></div>';}).join('')||'<div class="muted">Set list on the night.</div>';
   return '<div class="wrap"><button class="back" onclick="go(\''+'hub\')">\u2039 Back</button><div class="eyb">Now on Stage</div><h1>'+esc(a.name)+'</h1><div class="sub">'+esc(a.bio||'')+'</div>'
