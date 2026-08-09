@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script><title>Le Noir &#183; Band Dashboard</title><style>  :root{--noir:#0E0E0F;--panel:#161417;--line:#2a2620;--gold:#C9A24B;--gold-soft:#f2dca8;--cream:#EDE6D8;--muted:#9a938a;--err:#e0715f;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:#000;color:var(--cream);font-family:'Poppins',sans-serif;line-height:1.45;}
+  a{color:inherit;}
+  .wrap{max-width:480px;margin:0 auto;padding:22px 18px 70px;min-height:100vh;background:radial-gradient(130% 55% at 50% 0%, #17141a 0%, var(--noir) 48%, #000 100%);}
+  .dash{max-width:860px;}
+  .eyb{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;text-align:center;font-weight:500;}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;text-align:center;margin:6px 0 2px;}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;margin:0 0 8px;}
+  .sub{text-align:center;color:var(--muted);font-size:12.5px;margin-bottom:20px;}
+  .card{background:linear-gradient(180deg,var(--panel),#100e12);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0;}
+  .tile{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:linear-gradient(180deg,var(--panel),#100e12);border:1px solid var(--line);border-radius:14px;padding:16px;margin:10px 0;cursor:pointer;color:var(--cream);text-decoration:none;}
+  .tile:hover{border-color:var(--gold);}
+  .tile .ic{width:40px;height:40px;flex:0 0 40px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;}
+  .tile .t{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;}
+  .tile .d{font-size:11.5px;color:var(--muted);}
+  .tonight{border:1px solid var(--gold);background:linear-gradient(180deg,#1c1810,#12100b);}
+  .tonight .badge{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+  .btn{display:block;width:100%;text-align:center;background:var(--gold);color:#1a1508;border:none;font-family:'Poppins';font-weight:600;font-size:14px;padding:13px;border-radius:10px;cursor:pointer;margin-top:10px;text-decoration:none;}
+  .btn.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold);}
+  .btn.small{padding:9px;font-size:12.5px;}
+  input,textarea,select{width:100%;background:#0c0b0d;border:1px solid var(--line);color:var(--cream);font-family:'Poppins';font-size:14px;padding:11px;border-radius:9px;margin:6px 0;}
+  label{font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+  .song{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:11px 2px;}
+  .song:last-child{border-bottom:none;}.song .n{font-size:14px;}.song .a{font-size:11px;color:var(--muted);}
+  .req{background:var(--gold);color:#1a1508;border:none;font-weight:600;border-radius:8px;padding:7px 13px;font-size:12px;cursor:pointer;font-family:'Poppins';}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;}
+  .chip{border:1px solid var(--line);background:#0c0b0d;color:var(--cream);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:13px;font-family:'Poppins';}
+  .chip.on{background:var(--gold);color:#1a1508;border-color:var(--gold);font-weight:600;}
+  .seg{display:flex;gap:8px;margin-top:6px;}
+  .seg button{flex:1;background:#0c0b0d;border:1px solid var(--line);color:var(--cream);padding:10px;border-radius:9px;cursor:pointer;font-family:'Poppins';font-size:13px;}
+  .seg button.on{background:var(--gold);color:#1a1508;border-color:var(--gold);font-weight:600;}
+  .qrbox{background:#fff;border-radius:12px;padding:12px;width:184px;margin:10px auto 6px;text-align:center;}
+  .qrbox canvas{width:160px;height:160px;image-rendering:pixelated;display:block;margin:0 auto;}
+  .qrcap{text-align:center;font-size:11px;color:var(--muted);}
+  .rule{height:1px;background:var(--line);margin:16px 0;}.muted{color:var(--muted);font-size:12px;}
+  .back{background:none;border:none;color:var(--gold);font-size:13px;cursor:pointer;padding:0;margin-bottom:6px;font-family:'Poppins';}
+  .photo{width:100%;height:180px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:6px 0 10px;background:linear-gradient(135deg,#1a1712,#0d0c0e);display:flex;align-items:center;justify-content:center;}
+  .photo .ph{font-family:'Cormorant Garamond',serif;font-size:54px;color:var(--gold);letter-spacing:2px;}
+  .tagline{text-align:center;font-size:12.5px;color:var(--muted);margin:2px 0 4px;}
+  .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  @media(max-width:720px){.cols{grid-template-columns:1fr;}}
+  .col h3{font-family:'Poppins';font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:8px;}
+  .rc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:9px;padding:10px;margin:8px 0;}
+  .rc .s{font-size:14px;font-weight:500;}.rc .who{font-size:11px;color:var(--muted);margin-top:2px;}
+  .rc .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+  .rc .acts button{font-size:11px;padding:5px 9px;border-radius:6px;border:1px solid var(--line);background:#0c0b0d;color:var(--cream);cursor:pointer;font-family:'Poppins';}
+  .rc.tip{border-left-color:#6bbf59;}.rc.tip .amt{color:#8fe07d;font-weight:600;}
+  .empty{color:#5a544c;font-size:12px;font-style:italic;padding:10px 2px;}
+  .note{background:#141210;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--muted);margin-top:12px;}
+  .venue{background:linear-gradient(180deg,#1d1810,#12100b);border:1px solid var(--gold);border-radius:12px;padding:12px;margin:10px 0 16px;}
+  .venue h3{font-family:'Poppins';font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin:0 0 8px;}
+  .msg{background:#0f0d0b;border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin:7px 0;font-size:13px;}
+  .msg .mt{font-size:10px;color:var(--muted);margin-top:3px;}
+  .msg .mk{background:none;border:1px solid var(--line);color:var(--gold);border-radius:6px;font-size:10px;padding:3px 8px;cursor:pointer;margin-top:6px;font-family:'Poppins';}
+  .msg.done{opacity:.55;}
+  .compose{display:flex;gap:8px;margin-top:8px;}.compose input{margin:0;}
+  .compose button{background:var(--gold);color:#1a1508;border:none;border-radius:8px;padding:0 14px;font-weight:600;cursor:pointer;font-family:'Poppins';font-size:13px;}
+  .pill{display:inline-block;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:2px 7px;margin-left:6px;}
+  .rec2{position:relative;width:290px;height:290px;margin:14px auto 4px;}
+  .vinyl2{position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%, #0b0b0c 0 3px, #141317 3px 5px);box-shadow:0 12px 34px rgba(0,0,0,.6), inset 0 0 40px rgba(0,0,0,.8);animation:spin 9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .glabel{position:absolute;inset:20%;border-radius:50%;padding:14px;background:radial-gradient(circle at 50% 42%, #f7edcb, #e8d4a2 68%, #d9bd7d);border:2px solid var(--gold);box-shadow:0 0 0 5px #0b0b0c;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#201908;overflow:hidden;}
+  .glabel .gcat{font-family:'Poppins';font-size:8.5px;letter-spacing:2px;color:#7a5c12;text-transform:uppercase;font-weight:600;}
+  .glabel .gq{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;line-height:1.18;margin-top:5px;}
+  .glabel .gans{font-family:'Poppins';font-size:10.5px;color:#5a4410;margin-top:7px;border-top:1px solid rgba(122,92,18,.4);padding-top:6px;}
+  .famblk{margin:14px 0;}.famh{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+  .catgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .catbtn{background:linear-gradient(180deg,var(--panel),#100e12);border:1px solid var(--line);color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px 10px;border-radius:12px;cursor:pointer;}
+  .catbtn:hover{border-color:var(--gold);}
+  .banner{background:#3a1508;border:1px solid var(--err);color:#ffd7cf;padding:10px 12px;border-radius:9px;font-size:12.5px;margin:10px 0;}
+  .flash{animation:pulse 1.4s ease-in-out infinite;}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,162,75,.5)}50%{box-shadow:0 0 0 6px rgba(201,162,75,0)}}
+  .logo{width:100%;max-width:280px;display:block;margin:0 auto 22px;height:auto;}
+</style></head><body>
+<div id="app"><div class="wrap"><img src="logo.jpg" alt="Le Noir" class="logo"><div class="eyb">Band Dashboard</div><h1>Le Noir</h1><div class="sub">Loading&#8230;</div></div></div>
+<script>
+const SB_URL="https://kkwzkgnqmumvhrfmazhk.supabase.co";const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrd3prZ25xbXVtdmhyZm1hemhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzEwMTUsImV4cCI6MjEwMDc0NzAxNX0.FfB3JxLzyogNoMrKSU4U95zsCKJpXw-NfCh-D33-_dc";const sb=supabase.createClient(SB_URL,SB_KEY);
+function tlv(t,v){return t+String(v.length).padStart(2,'0')+v;}
+function crc16(s){let c=0xFFFF;for(const ch of s){c^=ch.charCodeAt(0)<<8;for(let i=0;i<8;i++){c=(c&0x8000)?((c<<1)^0x1021)&0xFFFF:(c<<1)&0xFFFF;}}return c.toString(16).toUpperCase().padStart(4,'0');}
+function isUEN(v){return /[A-Za-z]/.test(v);}
+function paynowPayload(raw,name){name=(name||'BAND').toUpperCase().slice(0,25);var v=(raw||'').replace(/\s/g,'');var t,p;
+  if(!v){return '';} if(isUEN(v)){t='2';p=v.toUpperCase();}else{t='0';if(!v.startsWith('+'))v='+65'+v.replace(/^0+/,'');p=v;}
+  var mai=tlv('00','SG.PAYNOW')+tlv('01',t)+tlv('02',p)+tlv('03','1');
+  var s=tlv('00','01')+tlv('01','11')+tlv('26',mai)+tlv('52','0000')+tlv('53','702')+tlv('58','SG')+tlv('59',name)+tlv('60','Singapore');
+  return s+'6304'+crc16(s+'6304');}
+function drawQRTo(cid,raw,name){var cv=document.getElementById(cid);if(!cv)return;var ctx=cv.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);
+  var pl=paynowPayload(raw,name);if(!pl)return;try{var qr=qrcode(0,'M');qr.addData(pl);qr.make();var n=qr.getModuleCount(),m=8,cell=(cv.width-2*m)/n;ctx.fillStyle='#0E0E0F';for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(qr.isDark(r,c))ctx.fillRect(Math.round(m+c*cell),Math.round(m+r*cell),Math.ceil(cell),Math.ceil(cell));}catch(e){}}
+
+function toMin(h){var p=(h||"0:0").split(':');return (+p[0])*60+(+p[1]);}
+function nowMin(){var d=new Date();return d.getHours()*60+d.getMinutes();}
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function todayISO(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function toast(m){var d=document.createElement('div');d.textContent=m;d.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#C9A24B;color:#1a1508;font-weight:600;padding:10px 18px;border-radius:999px;z-index:99;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.5)';document.body.appendChild(d);setTimeout(()=>d.remove(),1600);}
+
+var ACT=null,REQS=[],TIPS=[],MSGS=[];
+var actId=new URLSearchParams(location.search).get('act');
+async function load(){
+  if(!actId){return renderPicker();}
+  var a=await sb.from('acts').select('*').eq('id',actId).maybeSingle();ACT=a.data;
+  if(!ACT){document.getElementById('app').innerHTML='<div class="wrap"><h1>Le Noir</h1><div class="banner">Unknown band link.</div></div>';return;}
+  await refresh();subscribe();
+}
+async function refresh(){
+  var r=await sb.from('requests').select('*').eq('act_id',actId).order('created_at',{ascending:false});REQS=r.data||[];
+  var t=await sb.from('tips').select('*').eq('act_id',actId).order('created_at',{ascending:false});TIPS=t.data||[];
+  var m=await sb.from('messages').select('*').eq('act_id',actId).order('created_at',{ascending:false});MSGS=m.data||[];
+  render();
+}
+function subscribe(){sb.channel('dash-'+actId)
+  .on('postgres_changes',{event:'*',schema:'public',table:'requests',filter:'act_id=eq.'+actId},refresh)
+  .on('postgres_changes',{event:'*',schema:'public',table:'tips',filter:'act_id=eq.'+actId},refresh)
+  .on('postgres_changes',{event:'*',schema:'public',table:'messages',filter:'act_id=eq.'+actId},refresh).subscribe();
+  // Auto-refresh every 10 seconds as fallback
+  setInterval(refresh, 10000);
+}
+async function renderPicker(){var a=await sb.from('acts').select('*').order('name');var acts=a.data||[];
+  document.getElementById('app').innerHTML='<div class="wrap"><div class="eyb">Band Dashboard</div><h1>Choose your act</h1><div class="sub">Open your band\u2019s live screen</div>'+acts.map(x=>'<a class="tile" href="?act='+x.id+'"><div class="ic">\u266a</div><div><div class="t">'+esc(x.name)+'</div><div class="d">'+esc(x.lead||'')+'</div></div></a>').join('')+'</div>';}
+function fmt(ts){try{return new Date(ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
+function render(){
+  var neu=REQS.filter(r=>r.status==='new'),next=REQS.filter(r=>r.status==='next'),played=REQS.filter(r=>r.status==='played');
+  function rc(r){var rz=r.reason_type?'<div class="who" style="color:var(--gold-soft)">'+(r.reason_type==='Dedication'?'\u2665 Dedication '+esc(r.reason_detail):(r.reason_type==='Celebration'?'\ud83c\udf89 '+esc(r.reason_detail):(r.reason_detail?'\u201c'+esc(r.reason_detail)+'\u201d':'Other')))+'</div>':'';
+    return '<div class="rc"><div class="s">'+esc(r.song)+'</div><div class="who">'+esc(r.guest_name||'Guest')+(r.guest_table?' \u00b7 Table '+esc(r.guest_table):'')+' \u00b7 '+fmt(r.created_at)+'</div>'+rz+'<div class="acts">'+(r.status!=='next'?'<button onclick="setSt(\''+r.id+'\',\'next\')">Up next</button>':'')+(r.status!=='played'?'<button onclick="setSt(\''+r.id+'\',\'played\')">Played</button>':'')+'<button onclick="drop(\''+r.id+'\')">Dismiss</button></div></div>';}
+  var tips=TIPS.map(t=>'<div class="rc tip"><div class="s">\u2665 <span class="amt">S$'+esc(t.amount)+'</span> \u2014 '+esc(t.guest_name||'Guest')+'</div>'+(t.song?'<div class="who">for \u201c'+esc(t.song)+'\u201d</div>':'')+'<div class="acts"><button onclick="thank(\''+t.id+'\','+(t.thanked?'false':'true')+')">'+(t.thanked?'\u2713 Thanked':'Mark thanked')+'</button></div></div>').join('')||'<div class="empty">No tips yet.</div>';
+  var msgs=MSGS.map(m=>'<div class="msg'+(m.done?' done':' flash')+'"><div>'+esc(m.text)+'</div><div class="mt">'+fmt(m.created_at)+'</div><button class="mk" onclick="ackMsg(\''+m.id+'\','+(m.done?'false':'true')+')">'+(m.done?'\u2713 Announced':'Mark announced')+'</button></div>').join('')||'<div class="empty">No messages from the venue.</div>';
+  document.getElementById('app').innerHTML='<div class="wrap dash"><div class="eyb">Band Dashboard \u00b7 Live</div><h1>'+esc(ACT.name)+'</h1><div class="sub">Updates live as guests send requests.</div><div class="venue"><h3>\ud83d\udce3 From the Le Noir team</h3>'+msgs+'</div><div class="cols"><div class="col"><h3>New ('+neu.length+')</h3>'+(neu.map(rc).join('')||'<div class="empty">Waiting\u2026</div>')+'</div><div class="col"><h3>Up Next ('+next.length+')</h3>'+(next.map(rc).join('')||'<div class="empty">\u2014</div>')+'</div><div class="col"><h3>Played ('+played.length+')</h3>'+(played.map(rc).join('')||'<div class="empty">\u2014</div>')+'</div></div><div class="rule"></div><h3 style="color:var(--muted);font-size:11px;letter-spacing:2px">Tips to thank \u2665</h3>'+tips+'</div>';
+}
+async function setSt(id,st){await sb.from('requests').update({status:st}).eq('id',id);}
+async function drop(id){await sb.from('requests').delete().eq('id',id);}
+async function thank(id,v){await sb.from('tips').update({thanked:v}).eq('id',id);}
+async function ackMsg(id,v){await sb.from('messages').update({done:v}).eq('id',id);}
+load();
+</script></body></html>

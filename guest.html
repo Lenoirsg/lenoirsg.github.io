@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script><title>Le Noir</title><style>  :root{--noir:#0E0E0F;--panel:#161417;--line:#2a2620;--gold:#C9A24B;--gold-soft:#f2dca8;--cream:#EDE6D8;--muted:#9a938a;--err:#e0715f;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:#000;color:var(--cream);font-family:'Poppins',sans-serif;line-height:1.45;}
+  a{color:inherit;}
+  .wrap{max-width:480px;margin:0 auto;padding:22px 18px 70px;min-height:100vh;background:radial-gradient(130% 55% at 50% 0%, #17141a 0%, var(--noir) 48%, #000 100%);}
+  .dash{max-width:860px;}
+  .eyb{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;text-align:center;font-weight:500;}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;text-align:center;margin:6px 0 2px;}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;margin:0 0 8px;}
+  .sub{text-align:center;color:var(--muted);font-size:12.5px;margin-bottom:20px;}
+  .card{background:linear-gradient(180deg,var(--panel),#100e12);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0;}
+  .tile{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:linear-gradient(180deg,var(--panel),#100e12);border:1px solid var(--line);border-radius:14px;padding:16px;margin:10px 0;cursor:pointer;color:var(--cream);text-decoration:none;}
+  .tile:hover{border-color:var(--gold);}
+  .tile .ic{width:40px;height:40px;flex:0 0 40px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;}
+  .tile .t{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;}
+  .tile .d{font-size:11.5px;color:var(--muted);}
+  .tonight{border:1px solid var(--gold);background:linear-gradient(180deg,#1c1810,#12100b);}
+  .tonight .badge{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+  .btn{display:block;width:100%;text-align:center;background:var(--gold);color:#1a1508;border:none;font-family:'Poppins';font-weight:600;font-size:14px;padding:13px;border-radius:10px;cursor:pointer;margin-top:10px;text-decoration:none;}
+  .btn.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold);}
+  .btn.small{padding:9px;font-size:12.5px;}
+  input,textarea,select{width:100%;background:#0c0b0d;border:1px solid var(--line);color:var(--cream);font-family:'Poppins';font-size:14px;padding:11px;border-radius:9px;margin:6px 0;}
+  label{font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+  .song{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:11px 2px;}
+  .song:last-child{border-bottom:none;}.song .n{font-size:14px;}.song .a{font-size:11px;color:var(--muted);}
+  .req{background:var(--gold);color:#1a1508;border:none;font-weight:600;border-radius:8px;padding:7px 13px;font-size:12px;cursor:pointer;font-family:'Poppins';}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;}
+  .chip{border:1px solid var(--line);background:#0c0b0d;color:var(--cream);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:13px;font-family:'Poppins';}
+  .chip.on{background:var(--gold);color:#1a1508;border-color:var(--gold);font-weight:600;}
+  .seg{display:flex;gap:8px;margin-top:6px;}
+  .seg button{flex:1;background:#0c0b0d;border:1px solid var(--line);color:var(--cream);padding:10px;border-radius:9px;cursor:pointer;font-family:'Poppins';font-size:13px;}
+  .seg button.on{background:var(--gold);color:#1a1508;border-color:var(--gold);font-weight:600;}
+  .qrbox{background:#fff;border-radius:12px;padding:12px;width:184px;margin:10px auto 6px;text-align:center;}
+  .qrbox canvas{width:160px;height:160px;image-rendering:pixelated;display:block;margin:0 auto;}
+  .qrcap{text-align:center;font-size:11px;color:var(--muted);}
+  .rule{height:1px;background:var(--line);margin:16px 0;}.muted{color:var(--muted);font-size:12px;}
+  .back{background:none;border:none;color:var(--gold);font-size:13px;cursor:pointer;padding:0;margin-bottom:6px;font-family:'Poppins';}
+  .photo{width:100%;height:180px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:6px 0 10px;background:linear-gradient(135deg,#1a1712,#0d0c0e);display:flex;align-items:center;justify-content:center;}
+  .photo .ph{font-family:'Cormorant Garamond',serif;font-size:54px;color:var(--gold);letter-spacing:2px;}
+  .tagline{text-align:center;font-size:12.5px;color:var(--muted);margin:2px 0 4px;}
+  .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  @media(max-width:720px){.cols{grid-template-columns:1fr;}}
+  .col h3{font-family:'Poppins';font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:8px;}
+  .rc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:9px;padding:10px;margin:8px 0;}
+  .rc .s{font-size:14px;font-weight:500;}.rc .who{font-size:11px;color:var(--muted);margin-top:2px;}
+  .rc .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+  .rc .acts button{font-size:11px;padding:5px 9px;border-radius:6px;border:1px solid var(--line);background:#0c0b0d;color:var(--cream);cursor:pointer;font-family:'Poppins';}
+  .rc.tip{border-left-color:#6bbf59;}.rc.tip .amt{color:#8fe07d;font-weight:600;}
+  .empty{color:#5a544c;font-size:12px;font-style:italic;padding:10px 2px;}
+  .note{background:#141210;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--muted);margin-top:12px;}
+  .venue{background:linear-gradient(180deg,#1d1810,#12100b);border:1px solid var(--gold);border-radius:12px;padding:12px;margin:10px 0 16px;}
+  .venue h3{font-family:'Poppins';font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin:0 0 8px;}
+  .msg{background:#0f0d0b;border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin:7px 0;font-size:13px;}
+  .msg .mt{font-size:10px;color:var(--muted);margin-top:3px;}
+  .msg .mk{background:none;border:1px solid var(--line);color:var(--gold);border-radius:6px;font-size:10px;padding:3px 8px;cursor:pointer;margin-top:6px;font-family:'Poppins';}
+  .msg.done{opacity:.55;}
+  .compose{display:flex;gap:8px;margin-top:8px;}.compose input{margin:0;}
+  .compose button{background:var(--gold);color:#1a1508;border:none;border-radius:8px;padding:0 14px;font-weight:600;cursor:pointer;font-family:'Poppins';font-size:13px;}
+  .pill{display:inline-block;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:2px 7px;margin-left:6px;}
+  .rec2{position:relative;width:290px;height:290px;margin:14px auto 4px;}
+  .vinyl2{position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%, #0b0b0c 0 3px, #141317 3px 5px);box-shadow:0 12px 34px rgba(0,0,0,.6), inset 0 0 40px rgba(0,0,0,.8);animation:spin 9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .glabel{position:absolute;inset:20%;border-radius:50%;padding:14px;background:radial-gradient(circle at 50% 42%, #f7edcb, #e8d4a2 68%, #d9bd7d);border:2px solid var(--gold);box-shadow:0 0 0 5px #0b0b0c;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#201908;overflow:hidden;}
+  .glabel .gcat{font-family:'Poppins';font-size:8.5px;letter-spacing:2px;color:#7a5c12;text-transform:uppercase;font-weight:600;}
+  .glabel .gq{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;line-height:1.18;margin-top:5px;}
+  .glabel .gans{font-family:'Poppins';font-size:10.5px;color:#5a4410;margin-top:7px;border-top:1px solid rgba(122,92,18,.4);padding-top:6px;}
+  .famblk{margin:14px 0;}.famh{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+  .catgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .catbtn{background:linear-gradient(180deg,var(--panel),#100e12);border:1px solid var(--line);color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px 10px;border-radius:12px;cursor:pointer;}
+  .catbtn:hover{border-color:var(--gold);}
+  .banner{background:#3a1508;border:1px solid var(--err);color:#ffd7cf;padding:10px 12px;border-radius:9px;font-size:12.5px;margin:10px 0;}
+  .flash{animation:pulse 1.4s ease-in-out infinite;}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,162,75,.5)}50%{box-shadow:0 0 0 6px rgba(201,162,75,0)}}
+  .logo{width:100%;max-width:280px;display:block;margin:0 auto 22px;height:auto;}
+</style></head><body>
+<div id="app"><div class="wrap"><img src="logo.jpg" alt="Le Noir" class="logo"><div class="eyb">Bar  -  Kitchen  -  Stage</div><div class="sub">Loading...</div></div></div>
+<script>
+const SB_URL="https://kkwzkgnqmumvhrfmazhk.supabase.co";const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrd3prZ25xbXVtdmhyZm1hemhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzEwMTUsImV4cCI6MjEwMDc0NzAxNX0.FfB3JxLzyogNoMrKSU4U95zsCKJpXw-NfCh-D33-_dc";const sb=supabase.createClient(SB_URL,SB_KEY);
+function tlv(t,v){return t+String(v.length).padStart(2,'0')+v;}
+function crc16(s){let c=0xFFFF;for(const ch of s){c^=ch.charCodeAt(0)<<8;for(let i=0;i<8;i++){c=(c&0x8000)?((c<<1)^0x1021)&0xFFFF:(c<<1)&0xFFFF;}}return c.toString(16).toUpperCase().padStart(4,'0');}
+function isUEN(v){return /[A-Za-z]/.test(v);}
+function paynowPayload(raw,name){name=(name||'BAND').toUpperCase().slice(0,25);var v=(raw||'').replace(/\s/g,'');var t,p;
+  if(!v){return '';} if(isUEN(v)){t='2';p=v.toUpperCase();}else{t='0';if(!v.startsWith('+'))v='+65'+v.replace(/^0+/,'');p=v;}
+  var mai=tlv('00','SG.PAYNOW')+tlv('01',t)+tlv('02',p)+tlv('03','1');
+  var s=tlv('00','01')+tlv('01','11')+tlv('26',mai)+tlv('52','0000')+tlv('53','702')+tlv('58','SG')+tlv('59',name)+tlv('60','Singapore');
+  return s+'6304'+crc16(s+'6304');}
+function drawQRTo(cid,raw,name){var cv=document.getElementById(cid);if(!cv)return;var ctx=cv.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);
+  var pl=paynowPayload(raw,name);if(!pl)return;try{var qr=qrcode(0,'M');qr.addData(pl);qr.make();var n=qr.getModuleCount(),m=8,cell=(cv.width-2*m)/n;ctx.fillStyle='#0E0E0F';for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(qr.isDark(r,c))ctx.fillRect(Math.round(m+c*cell),Math.round(m+r*cell),Math.ceil(cell),Math.ceil(cell));}catch(e){}}
+
+function toMin(h){var p=(h||"0:0").split(':');return (+p[0])*60+(+p[1]);}
+function nowMin(){var d=new Date();return d.getHours()*60+d.getMinutes();}
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function todayISO(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function toast(m){var d=document.createElement('div');d.textContent=m;d.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#C9A24B;color:#1a1508;font-weight:600;padding:10px 18px;border-radius:999px;z-index:99;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.5)';document.body.appendChild(d);setTimeout(()=>d.remove(),1600);}
+
+var DECK={"For a Laugh": ["What song do you pretend you hate but secretly know every word to?", "What's the most embarrassing song in your liked playlist right now?", "If your life had a laugh track, what song would replace it?", "What song instantly makes you drive faster?", "What's a lyric you sang wrong for years before learning the truth?"], "Makes You Think": ["What song would you want played at the most important moment of your life?", "Is there a song you can't listen to anymore because of who it reminds you of?", "What song feels like home to you?", "If you could keep only five songs forever, what's the first you'd lock in?", "What song changed how you saw the world?"], "Tell Us": ["What was the first album or song you bought with your own money?", "What song was playing during a moment you'll never forget?", "What's a song that belongs to your family?", "Who introduced you to your favourite music?", "What song reminds you of your first crush?"], "What If": ["If you could duet with anyone, living or dead \u2014 who, and what song?", "Stranded on an island with one album \u2014 which?", "If you could un-hear one song to experience it fresh, which?", "What song would you want as your ringtone if everyone could hear it?", "If you could master one instrument overnight, which?"], "After Midnight": ["What song do you hope is the last thing you ever hear?", "Is there a song that healed something in you?", "What music do you want your children \u2014 real or imagined \u2014 to know?", "What song makes you forgive someone, at least for three minutes?", "What's a song that feels like a promise you made to yourself?"], "Name the Band": [{"q": "Name the four Beatles.", "a": "John Lennon, Paul McCartney, George Harrison & Ringo Starr"}, {"q": "Name the four members of ABBA.", "a": "Agnetha, Bj\u00f6rn, Benny & Anni-Frid"}, {"q": "Name the four members of Queen.", "a": "Freddie Mercury, Brian May, Roger Taylor & John Deacon"}, {"q": "Name the three Bee Gees.", "a": "Barry, Robin & Maurice Gibb"}, {"q": "Who is the lead singer of Led Zeppelin?", "a": "Robert Plant"}], "Finish the Lyric": [{"q": "\u201cIs this the real life? Is this just\u2026\u201d", "a": "fantasy"}, {"q": "\u201cWe don't need no\u2026\u201d", "a": "education"}, {"q": "\u201cHello darkness, my old\u2026\u201d", "a": "friend"}, {"q": "\u201c\u2026good times never seemed so\u2026\u201d", "a": "good"}, {"q": "\u201cI want it that\u2026\u201d", "a": "way"}], "Who Sang It": [{"q": "\u201cRolling in the Deep\u201d?", "a": "Adele"}, {"q": "\u201cBillie Jean\u201d?", "a": "Michael Jackson"}, {"q": "\u201cLike a Prayer\u201d?", "a": "Madonna"}, {"q": "\u201cSmells Like Teen Spirit\u201d?", "a": "Nirvana"}, {"q": "\u201cShape of You\u201d?", "a": "Ed Sheeran"}], "Charades": [{"q": "\u201cStayin' Alive\u201d \u2014 Bee Gees", "a": "Act it out"}, {"q": "\u201cYMCA\u201d \u2014 Village People", "a": "Act it out"}, {"q": "\u201cThriller\u201d \u2014 Michael Jackson", "a": "Act it out"}, {"q": "\u201cSingle Ladies\u201d \u2014 Beyonc\u00e9", "a": "Act it out"}, {"q": "\u201cWe Will Rock You\u201d \u2014 Queen", "a": "Act it out"}], "Impressions": [{"q": "Elvis Presley", "a": "Become them"}, {"q": "Freddie Mercury", "a": "Become them"}, {"q": "Adele", "a": "Become them"}, {"q": "Mick Jagger", "a": "Become them"}, {"q": "Dolly Parton", "a": "Become them"}]};
+var FAMILIES={"Talk": ["For a Laugh", "Makes You Think", "Tell Us", "What If", "After Midnight"], "Trivia": ["Name the Band", "Finish the Lyric", "Who Sang It"], "Perform": ["Charades", "Impressions"]};
+var ACTS=[],CUR=null,LINEUP=[],OVERRIDE=null,view='hub';
+var gameMode='card',gameCard=null,gameReveal=false,gReason={type:'',celeb:''},tipAmt=10;
+async function load(){
+  var a=await sb.from('acts').select('*');ACTS=a.data||[];
+  var l=await sb.from('lineup').select('*').eq('night',todayISO());LINEUP=l.data||[];
+  var c=await sb.from('control').select('*').maybeSingle();OVERRIDE=(c.data&&c.data.override_act_id)||null;
+  CUR=computeCur();render();
+}
+function actById(id){return ACTS.find(x=>x.id===id);}
+function computeCur(){if(OVERRIDE&&actById(OVERRIDE))return actById(OVERRIDE);var l=LINEUP.slice().sort((a,b)=>toMin(a.start_time)-toMin(b.start_time));if(!l.length)return null;var nm=nowMin(),cur=l[0];l.forEach(s=>{if(toMin(s.start_time)<=nm)cur=s;});return actById(cur.act_id)||null;}
+function nextSlot(){var l=LINEUP.slice().sort((a,b)=>toMin(a.start_time)-toMin(b.start_time)),nm=nowMin();for(var s of l){if(toMin(s.start_time)>nm)return s;}return null;}
+function go(v){view=v;render();window.scrollTo(0,0);}
+function initials(n){return (n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
+function playlistOf(a){try{return Array.isArray(a.playlist)?a.playlist:JSON.parse(a.playlist||'[]');}catch(e){return [];}}
+function render(){var el=document.getElementById('app');
+  if(view==='hub')el.innerHTML=hub();else if(view==='info')el.innerHTML=info();else if(view==='request')el.innerHTML=request();else if(view==='game')el.innerHTML=gameView();else if(view==='promos')el.innerHTML=promos();
+  if((view==='info'||view==='request')&&CUR)setTimeout(()=>drawQRTo('tipqr',CUR.paynow,CUR.name),0);}
+function hub(){var ns=nextSlot();
+  var tonight=CUR?'<div class="tile tonight" onclick="go(\''+'info\')"><div class="ic">\u266a</div><div><div class="badge">Now on stage</div><div class="t">'+esc(CUR.name)+'</div><div class="d">'+esc(CUR.bio||'')+'</div>'+(ns?'<div class="d" style="color:var(--gold)">Up next \u00b7 '+esc((actById(ns.act_id)||{}).name||'')+' \u00b7 '+ns.start_time+'</div>':'')+'</div></div>':'<div class="tile tonight"><div class="ic">\u266a</div><div><div class="badge">Tonight</div><div class="t">Live music</div><div class="d">Line-up coming soon</div></div></div>';
+  return '<div class="wrap"><div class="eyb">Bar \u00b7 Kitchen \u00b7 Stage</div><div class="sub">Welcome</div>'+tonight
+   +'<a class="tile" href="https://lenoir.com.sg/food/" target="_blank"><div class="ic">\u2630</div><div><div class="t">Food Menu</div><div class="d">Intros to The Encore</div></div></a>'
+   +'<a class="tile" href="drinks-menu.pdf" target="_blank"><div class="ic">\u25cd</div><div><div class="t">Drinks & Cocktails</div><div class="d">Originals & A Cappella</div></div></a>'
+   +(CUR?'<div class="tile" onclick="go(\''+'request\')"><div class="ic">\u266a</div><div><div class="t">Request a Song</div><div class="d">Pick from tonight\u2019s set or suggest one</div></div></div>':'')
+   +'<div class="tile" onclick="openGame()"><div class="ic">\u25c9</div><div><div class="t">Play \u00b7 The Le Noir Deck</div><div class="d">Music questions, trivia & dares</div></div></div>'
+   +'<div class="tile" onclick="go(\'promos\')"><div class="ic">\u2605</div><div><div class="t">Promos</div><div class="d">Tonight\u2019s offers & loyalty</div></div></div></div>';}
+function info(){var a=CUR;if(!a)return hub();var pl=playlistOf(a);
+  var songs=pl.slice(0,8).map(s=>{var p=s.split(' \u2014 ');return '<div class="song"><div><div class="n">'+esc(p[0])+'</div><div class="a">'+esc(p[1]||'')+'</div></div></div>';}).join('')||'<div class="muted">Set list on the night.</div>';
+  return '<div class="wrap"><button class="back" onclick="go(\''+'hub\')">\u2039 Back</button><div class="eyb">Now on Stage</div><h1>'+esc(a.name)+'</h1><div class="sub">'+esc(a.bio||'')+'</div>'
+   +'<div class="photo">'+(a.photo?'<img src="'+esc(a.photo)+'" alt="'+esc(a.name)+'" style="width:100%;height:100%;object-fit:cover">':'<div class="ph">'+initials(a.name)+'</div>')+'</div>'
+   +(a.socials?'<div class="tagline" style="color:var(--gold)">'+esc(a.socials)+'</div>':'')
+   +'<button class="btn" onclick="go(\''+'request\')">Request a song \u203a</button>'
+   +(a.page?'<a class="btn ghost" href="'+esc(a.page)+'" target="_blank">Meet the band \u203a</a>':'')
+   +'<div class="card"><h2>Tonight\u2019s set</h2>'+songs+'</div>'
+   +'<div class="card"><h2>Tip the band</h2><div class="muted">Goes straight to '+esc(a.name)+' \u2014 Le Noir doesn\u2019t take a cut.</div>'
+   +'<div class="chips" id="chips">'+[5,10,20].map(v=>'<div class="chip" onclick="pickTip('+v+')">S$'+v+'</div>').join('')+'<div class="chip" onclick="pickTip(\''+'custom\')">Custom</div></div>'
+   +'<div id="customWrap" style="display:none"><input id="customAmt" type="number" placeholder="Amount S$"></div>'
+   +'<div class="qrbox"><canvas id="tipqr" width="160" height="160"></canvas></div><div class="qrcap">Scan with any bank app \u00b7 PayNow \u00b7 enter the amount</div>'
+   +'<div class="rule"></div><input id="tName" placeholder="Your name (so they can thank you)"><button class="btn" onclick="declareTip()">I\u2019ve sent my tip \u2665</button></div>'
+   +'<div class="note">Tips go direct to the band\u2019s PayNow. \u201cI\u2019ve sent my tip\u201d posts a thank-you so they can shout you out.</div></div>';}
+function pickTip(v){tipAmt=v;var w=document.getElementById('customWrap');if(w)w.style.display=(v==='custom')?'block':'none';document.querySelectorAll('#chips .chip').forEach(c=>c.classList.remove('on'));var f=[...document.querySelectorAll('#chips .chip')].find(c=>c.textContent==='S$'+v||(v==='custom'&&c.textContent==='Custom'));if(f)f.classList.add('on');}
+function request(){var a=CUR;if(!a)return hub();var pl=playlistOf(a);
+  var songs=pl.map(s=>{var p=s.split(' \u2014 ');return '<div class="song"><div><div class="n">'+esc(p[0])+'</div><div class="a">'+esc(p[1]||'')+'</div></div><button class="req" onclick="addReq(this.getAttribute(\''+'data-s\'))" data-s="'+esc(p[0])+'">Request</button></div>';}).join('')||'<div class="muted">Suggest any song below.</div>';
+  return '<div class="wrap"><button class="back" onclick="go(\''+'info\')">\u2039 '+esc(a.name)+'</button><div class="eyb">Now on Stage</div><h1>'+esc(a.name)+'</h1>'
+   +'<div class="card"><h2>Your details</h2><div class="muted" style="margin-bottom:4px">So the band can give you a shout-out.</div>'
+   +'<div style="display:flex;gap:8px"><input id="reqName" placeholder="Your name"><input id="reqTable" placeholder="Table" style="max-width:104px"></div>'
+   +'<label>Reason for the request</label><div class="seg" id="segReason"><button type="button" data-r="Dedication" onclick="setReason(\''+'Dedication\')">Dedication</button><button type="button" data-r="Celebration" onclick="setReason(\''+'Celebration\')">Celebration</button><button type="button" data-r="Other" onclick="setReason(\''+'Other\')">Other</button></div>'
+   +'<div id="r_ded" style="display:none"><label>Dedicate to</label><input id="dedTo" placeholder="Who\u2019s it for?"></div>'
+   +'<div id="r_celeb" style="display:none"><label>Celebrating</label><div class="chips" id="celebChips">'+['Birthday','Anniversary','Newly wed','Newly engaged','Other'].map(c=>'<div class="chip" onclick="setCeleb(this.textContent)">'+c+'</div>').join('')+'</div><div id="celebOtherWrap" style="display:none"><input id="celebOther" placeholder="Tell us the occasion"></div></div>'
+   +'<div id="r_other" style="display:none"><label>Tell us more</label><input id="otherText" placeholder="Anything the band should know"></div></div>'
+   +'<div class="card"><h2>Request a song</h2><input id="freeSong" placeholder="Song title"><input id="freeArtist" placeholder="Artist"><button class="btn" onclick="addFree()">Send request</button></div>'+'<div style="text-align:center;margin-top:14px"><a onclick="go(\'info\')" style="color:var(--gold);font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">Want to tip the band? \u2665</a></div>'+'</div>';}
+function setReason(t){gReason.type=t;document.querySelectorAll('#segReason button').forEach(b=>b.classList.toggle('on',b.dataset.r===t));document.getElementById('r_ded').style.display=(t==='Dedication')?'block':'none';document.getElementById('r_celeb').style.display=(t==='Celebration')?'block':'none';document.getElementById('r_other').style.display=(t==='Other')?'block':'none';}
+function setCeleb(v){gReason.celeb=v;document.querySelectorAll('#celebChips .chip').forEach(c=>c.classList.toggle('on',c.textContent===v));document.getElementById('celebOtherWrap').style.display=(v==='Other')?'block':'none';}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+function buildReason(){if(gReason.type==='Dedication'){var to=val('dedTo');return to?{type:'Dedication',detail:'to '+to}:null;}if(gReason.type==='Celebration'){var c=gReason.celeb;if(!c)return null;if(c==='Other')c=val('celebOther')||'Celebration';return {type:'Celebration',detail:c};}if(gReason.type==='Other'){return {type:'Other',detail:val('otherText')};}return null;}
+function collectDetails(){var name=val('reqName'),table=val('reqTable');if(!name||!table){alert('Please add your name and table first.');window.scrollTo(0,0);return null;}if(!gReason.type){alert('Please choose a reason.');return null;}var r=buildReason();if(gReason.type==='Dedication'&&!r){alert('Who is the dedication to?');return null;}if(gReason.type==='Celebration'&&!r){alert('Which celebration?');return null;}return {name:name,table:table,reason:r};}
+async function sendReq(song){var d=collectDetails();if(!d)return false;var res=await sb.from('requests').insert({act_id:CUR.id,song:song,guest_name:d.name,guest_table:d.table,reason_type:(d.reason&&d.reason.type)||'',reason_detail:(d.reason&&d.reason.detail)||''});if(res.error){alert('Could not send \u2014 try again.');return false;}toast('Request sent \u266a');return true;}
+async function addReq(song){await sendReq(song);}
+async function addFree(){var t=val('freeSong');if(!t){alert('Enter a song title');return;}var ar=val('freeArtist');var s=ar?(t+' \u2014 '+ar):t;if(await sendReq(s)){var f=document.getElementById('freeSong');if(f)f.value='';var g=document.getElementById('freeArtist');if(g)g.value='';}}
+async function declareTip(){var amt=(tipAmt==='custom')?(val('customAmt')||'?'):tipAmt;await sb.from('tips').insert({act_id:CUR.id,amount:String(amt),guest_name:val('tName')||'Guest',song:''});toast('Thank you! The band can see it \u2665');}
+function promos(){return '<div class="wrap"><button class="back" onclick="go(\'hub\')">&#8249; Back</button>'+'<div class="eyb">Le Noir</div><h1>Promos</h1><div class="sub">Offers &amp; perks</div>'+'<a class="tile" href="https://lenoir.com.sg/wp-content/uploads/2026/08/weeklypromo.jpeg" target="_blank"><div class="ic">&#9733;</div><div><div class="t">This Week&#8217;s Offers</div><div class="d">Tap to view</div></div></a>'+'<div class="card"><h2>Le Noir Perks</h2><div class="song"><div><div class="n">Sundowners</div><div class="a">Every day till 7pm (except public holidays)</div></div></div></div>'+'</div>';}
+function drawCard(cat){var arr=DECK[cat];var c=arr[Math.floor(Math.random()*arr.length)];gameCard=(typeof c==='string')?{cat:cat,q:c}:{cat:cat,q:c.q,a:c.a};gameReveal=false;gameMode='card';render();}
+function starterCard(){var cats=FAMILIES['Talk'];drawCard(cats[Math.floor(Math.random()*cats.length)]);}
+function openGame(){view='game';starterCard();window.scrollTo(0,0);}
+function playMore(){gameMode='choose';render();}
+function revealAns(){gameReveal=true;render();}
+function recCard(card){return '<div class="rec2"><div class="vinyl2"></div><div class="glabel"><div class="gcat">'+esc(card.cat)+'</div><div class="gq">'+esc(card.q)+'</div>'+(card.a&&gameReveal?'<div class="gans">'+esc(card.a)+'</div>':'')+'</div></div>';}
+function gameView(){if(gameMode==='choose'){var fam=Object.keys(FAMILIES).map(fk=>'<div class="famblk"><div class="famh">'+fk+'</div><div class="catgrid">'+FAMILIES[fk].map(c=>'<button class="catbtn" onclick="drawCard(this.textContent)">'+c+'</button>').join('')+'</div></div>').join('');return '<div class="wrap"><button class="back" onclick="go(\''+'hub\')">\u2039 Back</button><div class="eyb">The Le Noir Deck</div><h1>Pick a category</h1><div class="sub">Choose your next card</div>'+fam+'</div>';}
+  var c=gameCard,hasA=!!c.a;return '<div class="wrap" style="text-align:center"><button class="back" onclick="go(\''+'hub\')" style="text-align:left;display:block">\u2039 Back</button><div class="eyb">The Le Noir Deck</div>'+recCard(c)+(hasA&&!gameReveal?'<button class="btn ghost" style="max-width:240px;margin:8px auto" onclick="revealAns()">Reveal answer</button>':'')+'<div class="muted" style="margin:14px 0 6px">Answered it? Keep the night going.</div><button class="btn" style="max-width:300px;margin:0 auto" onclick="playMore()">Play more \u25b8</button><button class="btn ghost" style="max-width:300px;margin:8px auto 0" onclick="go(\''+'hub\')">Back to hub</button></div>';}
+load();
+</script></body></html>

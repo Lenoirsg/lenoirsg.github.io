@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>Le Noir — Band Links</title>
+  <style>
+    :root {
+      --noir: #0E0E0F;
+      --panel: #161417;
+      --line: #2a2620;
+      --gold: #C9A24B;
+      --cream: #EDE6D8;
+      --muted: #9a938a;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #000;
+      color: var(--cream);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      min-height: 100vh;
+      background: radial-gradient(130% 55% at 50% 0%, #17141a 0%, var(--noir) 48%, #000 100%);
+    }
+    .logo {
+      width: 100%;
+      max-width: 260px;
+      display: block;
+      margin: 0 auto 28px;
+      height: auto;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 36px;
+      text-align: center;
+      margin: 0 0 6px;
+    }
+    .sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+    .links {
+      display: grid;
+      gap: 12px;
+    }
+    .link-card {
+      background: linear-gradient(180deg, var(--panel), #100e12);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .band-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .band-link {
+      word-break: break-all;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-family: monospace;
+    }
+    .copy-btn {
+      background: var(--gold);
+      color: #1a1508;
+      border: none;
+      font-family: 'Poppins';
+      font-weight: 600;
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background: #A97F32;
+    }
+    .note {
+      background: #141210;
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 28px;
+      text-align: center;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #1a1508;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 999px;
+      z-index: 99;
+      font-size: 13px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+    @media print {
+      .copy-btn {
+        display: none;
+      }
+      body {
+        background: white;
+        color: black;
+      }
+      .wrap {
+        background: white;
+      }
+      .link-card {
+        background: white;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img src="logo.jpg" alt="Le Noir" class="logo">
+    <h1>Band Dashboard Links</h1>
+    <div class="sub">Bookmark these on the stage tablet or print this page</div>
+    <div id="links" class="links">
+      <div class="loading">Loading bands...</div>
+    </div>
+    <div class="note">Print this page to keep at the bar, or bookmark each link on the stage tablet.</div>
+  </div>
+
+  <script>
+    const SB_URL = "https://kkwzkgnqmumvhrfmazhk.supabase.co";
+    const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrd3prZ25xbXVtdmhyZm1hemhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzEwMTUsImV4cCI6MjEwMDc0NzAxNX0.FfB3JxLzyogNoMrKSU4U95zsCKJpXw-NfCh-D33-_dc";
+    const sb = supabase.createClient(SB_URL, SB_KEY);
+    
+    // Update this to your published Dashboard page URL
+    const DASH_BASE = "https://lenoirsg.github.io/dashboard";
+    
+    function esc(s) {
+      return (s == null ? '' : String(s)).replace(/[&<>"]/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;'
+      }[c]));
+    }
+    
+    function dashLink(id) {
+      return DASH_BASE + '?act=' + id;
+    }
+    
+    function toast(m) {
+      const d = document.createElement('div');
+      d.textContent = m;
+      d.className = 'toast';
+      document.body.appendChild(d);
+      setTimeout(() => d.remove(), 1600);
+    }
+    
+    function copyLink(url) {
+      navigator.clipboard.writeText(url).then(() => {
+        toast('Link copied');
+      });
+    }
+    
+    async function load() {
+      const a = await sb.from('acts').select('*').order('name');
+      const acts = a.data || [];
+      
+      if (!acts.length) {
+        document.getElementById('links').innerHTML = '<div class="loading">No bands added yet.</div>';
+        return;
+      }
+      
+      const html = acts.map(x => {
+        const link = dashLink(x.id);
+        return `<div class="link-card">
+          <div class="band-name">${esc(x.name)}</div>
+          <div class="band-link">${link}</div>
+          <button class="copy-btn" onclick="copyLink('${link}')">Copy link</button>
+        </div>`;
+      }).join('');
+      
+      document.getElementById('links').innerHTML = html;
+    }
+    
+    load();
+  </script>
+</body>
+</html>
