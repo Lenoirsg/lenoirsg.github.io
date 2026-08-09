@@ -1,4 +1,3 @@
-
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script><title>Le Noir</title><style>  :root{--noir:#0E0E0F;--panel:#161417;--line:#2a2620;--gold:#C9A24B;--gold-soft:#f2dca8;--cream:#EDE6D8;--muted:#9a938a;--err:#e0715f;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   body{margin:0;background:#000;color:var(--cream);font-family:'Poppins',sans-serif;line-height:1.45;}
@@ -110,7 +109,7 @@ function go(v){view=v;render();window.scrollTo(0,0);}
 function initials(n){return (n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
 function playlistOf(a){try{return Array.isArray(a.playlist)?a.playlist:JSON.parse(a.playlist||'[]');}catch(e){return [];}}
 function render(){var el=document.getElementById('app');
-  if(view==='hub')el.innerHTML=hub();else if(view==='info')el.innerHTML=info();else if(view==='request')el.innerHTML=request();else if(view==='game')el.innerHTML=gameView();else if(view==='promos')el.innerHTML=promos();
+  if(view==='hub')el.innerHTML=hub();else if(view==='info')el.innerHTML=info();else if(view==='request')el.innerHTML=request();else if(view==='game')el.innerHTML=gameView();
   if((view==='info'||view==='request')&&CUR)setTimeout(()=>drawQRTo('tipqr',CUR.paynow,CUR.name),0);}
 function hub(){var ns=nextSlot();
   var tonight=CUR?'<div class="tile tonight" onclick="go(\''+'info\')"><div class="ic">\u266a</div><div><div class="badge">Now on stage</div><div class="t">'+esc(CUR.name)+'</div><div class="d">'+esc(CUR.bio||'')+'</div>'+(ns?'<div class="d" style="color:var(--gold)">Up next \u00b7 '+esc((actById(ns.act_id)||{}).name||'')+' \u00b7 '+ns.start_time+'</div>':'')+'</div></div>':'<div class="tile tonight"><div class="ic">\u266a</div><div><div class="badge">Tonight</div><div class="t">Live music</div><div class="d">Line-up coming soon</div></div></div>';
@@ -119,7 +118,7 @@ function hub(){var ns=nextSlot();
    +'<a class="tile" href="drinks-menu.pdf" target="_blank"><div class="ic">\u25cd</div><div><div class="t">Drinks & Cocktails</div><div class="d">Originals & A Cappella</div></div></a>'
    +(CUR?'<div class="tile" onclick="go(\''+'request\')"><div class="ic">\u266a</div><div><div class="t">Request a Song</div><div class="d">Pick from tonight\u2019s set or suggest one</div></div></div>':'')
    +'<div class="tile" onclick="openGame()"><div class="ic">\u25c9</div><div><div class="t">Play \u00b7 The Le Noir Deck</div><div class="d">Music questions, trivia & dares</div></div></div>'
-   +'<div class="tile" onclick="go(\'promos\')"><div class="ic">\u2605</div><div><div class="t">Promos</div><div class="d">Tonight\u2019s offers & loyalty</div></div></div></div>';}
+   +'<a class="tile" href="https://lenoir.com.sg/wp-content/uploads/2026/08/weeklypromo.jpeg" target="_blank"><div class="ic">⭐</div><div><div class="t">Promos</div><div class="d">Tonight\'s offers & loyalty</div></div></a></div>';}
 function info(){var a=CUR;if(!a)return hub();var pl=playlistOf(a);
   var songs=pl.slice(0,8).map(s=>{var p=s.split(' \u2014 ');return '<div class="song"><div><div class="n">'+esc(p[0])+'</div><div class="a">'+esc(p[1]||'')+'</div></div></div>';}).join('')||'<div class="muted">Set list on the night.</div>';
   return '<div class="wrap"><button class="back" onclick="go(\''+'hub\')">\u2039 Back</button><div class="eyb">Now on Stage</div><h1>'+esc(a.name)+'</h1><div class="sub">'+esc(a.bio||'')+'</div>'
@@ -154,7 +153,6 @@ async function sendReq(song){var d=collectDetails();if(!d)return false;var res=a
 async function addReq(song){await sendReq(song);}
 async function addFree(){var t=val('freeSong');if(!t){alert('Enter a song title');return;}var ar=val('freeArtist');var s=ar?(t+' \u2014 '+ar):t;if(await sendReq(s)){var f=document.getElementById('freeSong');if(f)f.value='';var g=document.getElementById('freeArtist');if(g)g.value='';}}
 async function declareTip(){var amt=(tipAmt==='custom')?(val('customAmt')||'?'):tipAmt;await sb.from('tips').insert({act_id:CUR.id,amount:String(amt),guest_name:val('tName')||'Guest',song:''});toast('Thank you! The band can see it \u2665');}
-function promos(){return '<div class="wrap"><button class="back" onclick="go(\'hub\')">&#8249; Back</button>'+'<div class="eyb">Le Noir</div><h1>Promos</h1><div class="sub">Offers &amp; perks</div>'+'<a class="tile" href="https://lenoir.com.sg/wp-content/uploads/2026/08/weeklypromo.jpeg" target="_blank"><div class="ic">&#9733;</div><div><div class="t">This Week&#8217;s Offers</div><div class="d">Tap to view</div></div></a>'+'<div class="card"><h2>Le Noir Perks</h2><div class="song"><div><div class="n">Sundowners</div><div class="a">Every day till 7pm (except public holidays)</div></div></div></div>'+'</div>';}
 function drawCard(cat){var arr=DECK[cat];var c=arr[Math.floor(Math.random()*arr.length)];gameCard=(typeof c==='string')?{cat:cat,q:c}:{cat:cat,q:c.q,a:c.a};gameReveal=false;gameMode='card';render();}
 function starterCard(){var cats=FAMILIES['Talk'];drawCard(cats[Math.floor(Math.random()*cats.length)]);}
 function openGame(){view='game';starterCard();window.scrollTo(0,0);}
