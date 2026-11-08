@@ -1,47 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Le Noir — This Week's Promos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le Noir — Promotions</title>
   <style>
+    @font-face {
+      font-family: Poppins;
+      src: url("assets/promos/poppins-regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 20px;
-      background: #000;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      background: #0e0e0d;
+      color: #BCB2A0;
+      font-family: Poppins, Arial, sans-serif;
     }
-    .back-btn {
-      align-self: flex-start;
-      background: #C9A24B;
-      color: #1a1508;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      font-family: 'Poppins', sans-serif;
-      margin-bottom: 20px;
+    main { max-width: 1160px; margin: auto; padding: 0 40px 70px; }
+    .back {
+      display: inline-block;
+      margin: 22px 0 0;
+      padding: 12px 0;
+      color: #C4A35A;
+      text-decoration: none;
+      font-size: 13px;
     }
-    .back-btn:hover {
-      background: #A97F32;
+    header { text-align: center; padding: 8px 0 38px; }
+    header img { width: 175px; height: auto; }
+    header p { font-size: 11px; letter-spacing: 4px; color: #C4A35A; }
+    h1 { font: 52px/1.15 Georgia, serif; margin: 12px 0; color: #eadbb9; }
+    .intro { font-size: 14px; max-width: 640px; margin: 18px auto; line-height: 1.8; }
+    .section {
+      border: 1px solid #50412c;
+      background: #181714;
+      margin: 28px 0 60px;
+      padding: 36px;
     }
-    img {
-      max-width: 100%;
+    .eyebrow { font-size: 11px; letter-spacing: 2px; color: #C4A35A; }
+    h2 { font: 40px/1.15 Georgia, serif; color: #eadbb9; margin: 16px 0; }
+    h3 { font: 28px/1.15 Georgia, serif; color: #eadbb9; margin: 20px 0 12px; }
+    p { font-size: 14px; line-height: 1.8; }
+    .expiry {
+      display: inline-block;
+      color: #d6bb7e;
+      padding: 8px 13px;
+      border: 1px solid #67512c;
+      font-size: 12px;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .product img {
+      width: 100%;
       height: auto;
-      border-radius: 8px;
-      max-height: 90vh;
       object-fit: contain;
+      background: #10100f;
+    }
+    .price { font: 29px Georgia, serif; color: #C4A35A; }
+    .pairing {
+      margin-top: 26px;
+      border-top: 1px solid #5b492e;
+      padding-top: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .pairing strong { font: 32px Georgia, serif; color: #eadbb9; }
+    .fine { font-size: 11px; line-height: 1.8; }
+    .nye-grid {
+      display: grid;
+      grid-template-columns: 43% 1fr;
+      gap: 32px;
+      margin-top: 24px;
+    }
+    .nye-grid img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      align-self: start;
+    }
+    .schedule {
+      padding: 16px 0;
+      border-top: 1px solid #50412c;
+      border-bottom: 1px solid #50412c;
+      line-height: 1.9;
+      font-size: 13px;
+    }
+    .cta {
+      display: block;
+      background: #C4A35A;
+      padding: 16px;
+      text-align: center;
+      color: #101010;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 22px 0;
+    }
+    .back:focus, .cta:focus, summary:focus { outline: 3px solid #fff; outline-offset: 4px; }
+    summary { cursor: pointer; font-size: 12px; color: #C4A35A; padding: 16px 0; }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      font: 11px/1.85 Poppins, Arial, sans-serif;
+      color: #BCB2A0;
+      max-height: 380px;
+      overflow: auto;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    @media (max-width: 680px) {
+      main { padding: 0 18px 40px; }
+      header { padding: 4px 0 22px; }
+      h1 { font-size: 38px; }
+      .section { padding: 22px; margin: 22px 0 38px; }
+      h2 { font-size: 33px; }
+      h3 { font-size: 27px; }
+      p { font-size: 13px; }
+      .grid, .nye-grid { display: block; }
+      .product { margin-top: 24px; }
+      .pairing { display: block; }
+      .pairing strong { display: block; margin-top: 12px; }
+      .nye-grid img { margin: 8px 0 24px; }
     }
   </style>
 </head>
 <body>
-  <button class="back-btn" onclick="window.history.back()">← Back to Le Noir</button>
-  <img src="https://lenoir.com.sg/wp-content/uploads/2026/08/weeklypromo.jpeg" alt="This Week's Promos">
+<main>
+  <a class="back" href="guest.html">← Back to Le Noir</a>
+  <header>
+    <img src="assets/promos/le-noir-logo.png" width="700" height="341" alt="Le Noir Marina Bay Sands">
+    <p>LE NOIR LIVE · PROMOTIONS</p>
+    <h1>Make more of your night.</h1>
+    <div class="intro">A signature cocktail and dessert pairing.<br>A waterfront New Year’s Eve celebration.</div>
+  </header>
+
+  <section class="section" aria-labelledby="tq">
+    <div class="eyebrow">01 / TANQUERAY NO.TEN</div>
+    <h2 id="tq">Made for each other.</h2>
+    <p>A signature cocktail &amp; dessert pairing.</p>
+    <p class="expiry">Available until 30 November 2026</p>
+    <div class="grid">
+      <article class="product">
+        <img src="assets/promos/no10-orchard.jpg" width="1080" height="1440" alt="Original photograph of the No.10 and Orchard cocktail">
+        <h3>No.10 and Orchard</h3>
+        <p>Tanqueray No.Ten · Oloroso sherry · Amaretto · acidified lime · Granny Smith soda.</p>
+        <div class="price">$28++</div>
+      </article>
+      <article class="product">
+        <img src="assets/promos/floating-island.jpg" width="1080" height="1350" alt="Original photograph of the Tanqueray dessert with crème anglaise being poured">
+        <h3>Tanqueray No.Ten<br>Floating Island</h3>
+        <p>Spiral meringue · shiso-infused Tanqueray No.Ten crème anglaise · yuzu sorbet · Granny Smith apple batons · G&amp;T compressed apple.</p>
+        <div class="price">$18++</div>
+      </article>
+    </div>
+    <div class="pairing">
+      <div>Cocktail &amp; dessert pairing<br><span class="fine">No.10 and Orchard + Tanqueray No.Ten Floating Island</span></div>
+      <strong>$42++</strong>
+    </div>
+    <p class="fine">Cocktail, dessert and pairing available until 30 November 2026.<br>Prices subject to GST &amp; service charge.</p>
+  </section>
+
+  <section class="section" aria-labelledby="nye">
+    <div class="eyebrow">02 / NEW YEAR’S EVE · 31 DECEMBER 2026</div>
+    <h2 id="nye">Midnight in Gold</h2>
+    <p>Welcome 2027 at Le Noir Marina Bay Sands.</p>
+    <div class="nye-grid">
+      <img src="assets/promos/nye-poster.jpg" width="1080" height="1440" alt="Midnight in Gold New Year’s Eve poster, shown in full">
+      <div>
+        <h3>Your waterfront countdown.</h3>
+        <p>Live music by O. K. READY!, bayfront seats for the fireworks and a festive feast.</p>
+        <p class="price">SGD460++ per person</p>
+        <p>Children aged 8–14: SGD395++<br>Admission ages 8 and above.</p>
+        <div class="schedule">Event: 7 pm–3 am<br>Buffet dinner: 7:30–9:30 pm<br>Free-flow Champagne &amp; wine: 9:30 pm–1 am<br>Late-night supper: from 11 pm<br>Last drinks orders: 2:30 am<br><span class="fine">All times SGT · overnight into 1 January 2027</span></div>
+        <p>Dress code: A Touch of Gold.</p>
+        <p class="fine">Guests under 18 will not be served alcohol.<br>Prices subject to GST &amp; service charge.</p>
+        <a class="cta" href="https://events.bistrochat.com/en/le-noir" target="_blank" rel="noopener noreferrer">Reserve your New Year’s Eve table.<span class="sr-only"> Opens in a new tab.</span></a>
+      </div>
+    </div>
+    <details>
+      <summary>Read full New Year’s Eve terms &amp; conditions</summary>
+      <pre>TERMS &amp; CONDITIONS
+
+Operations
+Event Timing: The event will run from 7 pm to 3 am.
+
+The last order for drinks is at 2:30 am.
+
+Refunds and No-Show
+A 50% refund is available for cancellations made before 10 am on the 30th of December. After this time, all payments become non-refundable.
+
+If you cancel your booking and are eligible for a refund, please email enquiry@lenoir.com.sg to arrange the refund. Refunds will be actioned within 7 days but may take up to 10 days more to reach your account.
+
+On the event day, reservations will be held for 60 minutes. After which, they will be treated as a no-show, and the table will be released to walk-in guests.
+
+No refunds will be issued for no-shows.
+
+Right of Refusal
+Le Noir MBS reserves the right to refuse entry without a refund.
+
+The venue also reserves the right, without refund or compensation, to refuse admission or evict any person(s) whose conduct is disorderly, inappropriate, or poses a threat to security or the enjoyment of the event by others.
+
+Liability
+Guests assume all risk of injury and responsibility for property loss, destruction, or theft.
+
+Le Noir MBS, its employees, and performers are released from any liability whatsoever.
+
+Age Limit
+Admission is restricted to guests aged 8 years and above.
+
+Guests under 18 will not be served alcohol.
+
+No refund will be given for those refused entry due to the age limit.
+
+Reservation Inclusions
+No food or drink substitutions can be made.
+
+Any items not consumed cannot be refunded or exchanged.
+
+The à la carte menu for drinks will be available.
+
+Photography
+Please note that photography, filming and/or recording will be conducted by Le Noir, Marina Bay Sands or their representatives. We may use such photographs, videos or recordings taken for promotional, marketing or advertising purposes, including publishing such photographs, videos or recordings on publicly available websites and social media.
+
+By entering the venue, you consent to being photographed, filmed and/or otherwise recorded and for Le Noir, Marina Bay Sands or their representatives to use your image and likeness for the purposes stated herein without any remuneration to you.
+
+Weather Contingency
+The event will take place rain or shine, with no contingency for weather.
+
+In case of rain, guests will be moved to the mall.
+
+We appreciate your understanding and cooperation. If you have any questions or need further clarification, feel free to reach out. We look forward to hosting you at Le Noir MBS!
+
+#01-84 THE SHOPPES, 2A BAYFRONT AVE / WWW.LENOIR.COM.SG
+</pre>
+    </details>
+  </section>
+</main>
 </body>
 </html>
